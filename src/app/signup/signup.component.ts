@@ -1,16 +1,40 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SignupService } from './signup.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  standalone: true
+  standalone: true,
+  providers: [SignupService],
+  imports: [HttpClientModule, ReactiveFormsModule],
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  signupForm!: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private selfService: SignupService) {
+    this.signupForm = new FormGroup({
+      username: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
+  }
+
+  ngOnInit(): void {}
+
+  onSignUpClick(): void {
+    this.selfService.signup({
+      username: this.signupForm.get('username')?.value,
+      password: this.signupForm.get('password')?.value,
+    });
   }
 
 }
