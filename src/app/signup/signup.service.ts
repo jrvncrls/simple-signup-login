@@ -7,6 +7,6 @@ export class SignupService {
   constructor(private httpClient: HttpClient) {}
 
   signup(payload: { username: string; password: string }) {
-    return this.httpClient.post(`${environment.apiUrl}/signup`, payload);
+    return this.httpClient.post(`${environment.apiUrl}/auth/signup`, payload)
   }
 }

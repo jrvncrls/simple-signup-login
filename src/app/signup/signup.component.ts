@@ -1,6 +1,11 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { SignupService } from './signup.service';
 
 @Component({
@@ -9,13 +14,12 @@ import { SignupService } from './signup.service';
   styleUrls: ['./signup.component.scss'],
   standalone: true,
   providers: [SignupService],
-  imports: [HttpClientModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
 })
 export class SignupComponent implements OnInit {
-
   signupForm!: FormGroup;
 
-  constructor(private selfService: SignupService) {
+  constructor(private selfService: SignupService, private router: Router) {
     this.signupForm = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
@@ -31,10 +35,14 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   onSignUpClick(): void {
-    this.selfService.signup({
-      username: this.signupForm.get('username')?.value,
-      password: this.signupForm.get('password')?.value,
-    });
+    this.selfService
+      .signup({
+        username: this.signupForm.get('username')?.value,
+        password: this.signupForm.get('password')?.value,
+      })
+      .subscribe(() => {
+        alert('You have sign up successfully!');
+        this.router.navigate(['/login']);
+      });
   }
-
 }

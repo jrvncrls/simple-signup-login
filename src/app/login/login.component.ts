@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -14,7 +13,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./login.component.scss'],
   standalone: true,
   providers: [LoginService],
-  imports: [HttpClientModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
