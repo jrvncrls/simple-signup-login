@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -14,7 +15,7 @@ import { SignupService } from './signup.service';
   styleUrls: ['./signup.component.scss'],
   standalone: true,
   providers: [SignupService],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
@@ -23,6 +24,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
+        Validators.minLength(5),
         Validators.maxLength(20),
       ]),
       password: new FormControl(null, [
