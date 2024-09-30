@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { catchError, take, throwError } from 'rxjs';
 import { LoginService } from './login.service';
 
@@ -20,7 +21,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private selfService: LoginService) {
+  constructor(private selfService: LoginService, private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
@@ -46,6 +47,8 @@ export class LoginComponent implements OnInit {
         return throwError(() => new Error(err.error.message));
       }),
       take(1)
-    ).subscribe()
+    ).subscribe(() => {
+      this.router.navigate(['home'])
+    })
   }
 }

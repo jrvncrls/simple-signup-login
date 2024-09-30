@@ -2,6 +2,7 @@ import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth.interceptor';
@@ -23,7 +24,7 @@ export const authInterceptorProvider: Provider = {
     SignupComponent,
     HttpClientModule,
   ],
-  providers: [authInterceptorProvider],
+  providers: [authInterceptorProvider, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

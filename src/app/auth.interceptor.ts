@@ -21,17 +21,16 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({
       withCredentials: true,
     });
-    console.log(request);
+
     return next.handle(request).pipe(
       map((res) => {
         console.log(res);
         return res;
       }),
       catchError((error: HttpErrorResponse) => {
-        // Intercept and handle errors here
-        console.error('HTTP Error:', error);
         // Optionally handle the error or rethrow it
-        return throwError(error);
+        alert(error.error.message)
+        return throwError(() => new Error(error.error.message));
       })
     );
   }
