@@ -7,6 +7,6 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {}
 
   login(payload: { username: string; password: string }) {
-    return this.httpClient.post(`${environment.apiUrl}/login`, payload);
+    return this.httpClient.post(`${environment.apiUrl}/auth/login`, payload);
   }
 }

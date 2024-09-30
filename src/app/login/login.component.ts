@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { catchError, take, throwError } from 'rxjs';
 import { LoginService } from './login.service';
 
 @Component({
@@ -39,6 +40,12 @@ export class LoginComponent implements OnInit {
     this.selfService.login({
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value,
-    });
+    }).pipe(
+      catchError((err) => {
+        alert(err.error.message)
+        return throwError(() => new Error(err.error.message));
+      }),
+      take(1)
+    ).subscribe()
   }
 }
