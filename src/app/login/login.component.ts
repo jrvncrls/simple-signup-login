@@ -38,17 +38,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onLoginClick(): void {
-    this.selfService.login({
-      username: this.loginForm.get('username')?.value,
-      password: this.loginForm.get('password')?.value,
-    }).pipe(
-      catchError((err) => {
-        alert(err.error.message)
-        return throwError(() => new Error(err.error.message));
-      }),
-      take(1)
-    ).subscribe(() => {
-      this.router.navigate(['home'])
-    })
+    this.selfService
+      .login({
+        username: this.loginForm.get('username')?.value,
+        password: this.loginForm.get('password')?.value,
+      })
+      .pipe(
+        catchError(err => {
+          alert(err.error.message);
+          return throwError(() => new Error(err.error.message));
+        }),
+        take(1),
+      )
+      .subscribe(() => {
+        this.router.navigate(['home']);
+      });
   }
 }
