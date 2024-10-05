@@ -13,12 +13,12 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  users$!: Observable<Object>;
+  username$!: Observable<string>;
 
   constructor(private selfService: DashboardService) { }
 
   ngOnInit(): void {
-    this.users$ = this.selfService.getUsers();
+    this.username$ = this.selfService.getUsername();
   }
 
 }

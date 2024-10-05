@@ -1,12 +1,7 @@
-
 <div class="p-4">
   <h2>JRVNCRLS</h2>
 
   <div class="d-flex justify-content-center">
-    <h1>You have successfully logged in</h1>
-   <h3>Users</h3>
-
-   <p> {{users$ | async}}</p>
-
+    <h1>Welcome {{ username$ | async | uppercase }}</h1>
   </div>
 </div>
