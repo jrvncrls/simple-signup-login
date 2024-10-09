@@ -12,4 +12,10 @@ export class DashboardService {
       .get<{ data: { username: string } }>(`${environment.apiUrl}/auth`)
       .pipe(map(response => response.data.username));
   }
+
+  logout() {
+    return this.httpClient
+      .put<{ message: string }>(`${environment.apiUrl}/auth/logout`, null)
+      .pipe(map(response => response.message));
+  }
 }

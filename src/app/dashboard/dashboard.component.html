@@ -1,7 +1,15 @@
 <div class="p-4">
   <h2>JRVNCRLS</h2>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mb-3">
     <h1>Welcome {{ username$ | async | uppercase }}</h1>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-12">
+      <button class="btn btn-primary logout-btn" (click)="onLogoutClick()">
+        Logout
+      </button>
+    </div>
   </div>
 </div>
